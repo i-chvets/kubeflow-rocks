@@ -28,7 +28,8 @@ rockcraft pack
 ```
 
 # Testing
-
-=======
-# kubeflow-rocks
-Collection of ROCKs for Kubeflow components
+- After copying image to Docker using `skopeo`, run it:
+  ```
+  docker run -p8082:8082 -p 8080:8080 kubeflow-central-dashboard_1.6.0_amd64:rock
+  ```
+- Then navigate to `http://localhost:8082/`. UI should be displayed.
