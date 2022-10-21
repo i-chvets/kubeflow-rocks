@@ -17,7 +17,6 @@ Collection of ROCKs for Kubeflow components.
   rockcraft clean
   lxc --project rockcraft image list
   ```
-- Loo
 
 # Building ROCKs
 
