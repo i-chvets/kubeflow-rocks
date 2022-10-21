@@ -36,6 +36,7 @@ sudo skopeo --insecure-policy copy oci-archive:kubeflow-central-dashboard_1.6.0_
 # Testing
 
 ## centraldashboard
+
 - After copying image to Docker using `skopeo`, run it:
   ```
   docker run -p 8082:8082 -p 8080:8080 kubeflow-central-dashboard_1.6.0_amd64:rock

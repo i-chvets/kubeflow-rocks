@@ -36,12 +36,6 @@ parts:
       - PUPPETEER_SKIP_CHROMIUM_DOWNLOAD: true
     stage-packages:
       - bash # this is for debugging only, should be removed for production
-      - chromium-browser
-      - libnss3
-      - libfreetype-dev
-      - libharfbuzz-dev
-      - fonts-freefont-ttf
-      - libstdc++6
       - nodejs
       - npm
     override-build: |
