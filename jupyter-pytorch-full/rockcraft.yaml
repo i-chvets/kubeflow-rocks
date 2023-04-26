@@ -91,8 +91,6 @@ parts:
       - lsb-release
       - wget
     build-environment:
-      # The URL and tag to fetch Kubeflow requirements files from
-      # Use this to adjust the Kubeflow version
       - MINIFORGE_ARCH: "x86_64"
       - MINIFORGE_VERSION: "4.10.1-4"
       - PIP_VERSION: "21.1.2"
@@ -136,18 +134,18 @@ parts:
       "${CONDA_BIN}/conda" clean -a -f -y
 
       # Install the jupyter python requirements
-      wget -qO jupyter-requirements.txt "${CRAFT_PART_SRC}/components/example-notebook-servers/jupyter/requirements.txt"
+      cp ${CRAFT_PART_SRC}/components/example-notebook-servers/jupyter/requirements.txt jupyter-requirements.txt
       "${CONDA_BIN}/pip" install --no-cache-dir -r jupyter-requirements.txt
 
       # Generate a jupyter lab config
       "${CONDA_BIN}/jupyter" lab --generate-config --allow-root
 
       # Install the jupyter-pytorch cpu requirements
-      wget -qO requirements.txt "${CRAFT_PART_SRC}/components/example-notebook-servers/jupyter-pytorch/cpu-requirements.txt"
-      "${CONDA_BIN}/pip" install --no-cache-dir -r requirements.txt
+      cp $CRAFT_PART_SRC/components/example-notebook-servers/jupyter-pytorch/cpu-requirements.txt cpu-requirements.txt
+      "${CONDA_BIN}/pip" install --no-cache-dir -r cpu-requirements.txt
 
       # Install the jupyter-pytorch-full cpu requirements
-      wget -qO requirements.txt "${CRAFT_PART_SRC}/components/example-notebook-servers/jupyter-pytorch-full/requirements.txt"
+      cp $CRAFT_PART_SRC/components/example-notebook-servers/jupyter-pytorch-full/requirements.txt requirements.txt
       "${CONDA_BIN}/pip" install --no-cache-dir -r requirements.txt
 
       # Create some directories for staging files
