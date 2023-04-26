@@ -7,9 +7,15 @@ description: |
 
   Both PyTorch and Jupyter are installed in Conda environment, which is
   automatically activated.
-version: v1.7.0-rc.1
+version: v1.7.0_1 # version format: <KF-upstream-version>_<Charmed-KF-version>
 license: Apache-2.0
 base: ubuntu:22.04
+services:
+  jupyter:
+    override: replace
+    startup: enabled
+    user: jovyan
+    command: /opt/conda/bin/jupyter lab --notebook-dir="/home/jovyan" --ip=0.0.0.0 --no-browser --port=8888 --ServerApp.token="" --ServerApp.password="" --ServerApp.allow_origin="*" --ServerApp.base_url="/" --ServerApp.authenticate_prometheus=False
 platforms:
   amd64:
 
@@ -78,13 +84,15 @@ parts:
 
   conda-jupyter:
     plugin: nil
+    source: https://github.com/kubeflow/kubeflow
+    source-type: git
+    source-tag: v1.7-branch # upstream branch
     build-packages:
       - lsb-release
       - wget
     build-environment:
       # The URL and tag to fetch Kubeflow requirements files from
       # Use this to adjust the Kubeflow version
-      - KF_BASE_URL: "https://raw.githubusercontent.com/kubeflow/kubeflow/v1.7.0-rc.1/components/example-notebook-servers"
       - MINIFORGE_ARCH: "x86_64"
       - MINIFORGE_VERSION: "4.10.1-4"
       - PIP_VERSION: "21.1.2"
@@ -93,6 +101,7 @@ parts:
       - CONDA_DIR: "/opt/conda"
       - CONDA_BIN: "/opt/conda/bin"
     override-build: |
+      set -xe
       mkdir -p "$CONDA_DIR" "$HOME"
 
       # Download the miniforge installer
@@ -127,18 +136,18 @@ parts:
       "${CONDA_BIN}/conda" clean -a -f -y
 
       # Install the jupyter python requirements
-      wget -qO jupyter-requirements.txt "${KF_BASE_URL}/jupyter/requirements.txt"
+      wget -qO jupyter-requirements.txt "${CRAFT_PART_SRC}/components/example-notebook-servers/jupyter/requirements.txt"
       "${CONDA_BIN}/pip" install --no-cache-dir -r jupyter-requirements.txt
 
       # Generate a jupyter lab config
       "${CONDA_BIN}/jupyter" lab --generate-config --allow-root
 
       # Install the jupyter-pytorch cpu requirements
-      wget -qO requirements.txt "${KF_BASE_URL}/jupyter-pytorch/cpu-requirements.txt"
+      wget -qO requirements.txt "${CRAFT_PART_SRC}/components/example-notebook-servers/jupyter-pytorch/cpu-requirements.txt"
       "${CONDA_BIN}/pip" install --no-cache-dir -r requirements.txt
 
       # Install the jupyter-pytorch-full cpu requirements
-      wget -qO requirements.txt "${KF_BASE_URL}/jupyter-pytorch-full/requirements.txt"
+      wget -qO requirements.txt "${CRAFT_PART_SRC}/components/example-notebook-servers/jupyter-pytorch-full/requirements.txt"
       "${CONDA_BIN}/pip" install --no-cache-dir -r requirements.txt
 
       # Create some directories for staging files
@@ -156,14 +165,6 @@ parts:
       # Stage the conda directories
       cp -r "${CONDA_DIR}" "${CRAFT_PART_INSTALL}/opt/conda"
       cp -r "${HOME}" "${CRAFT_PART_INSTALL}/${HOME}"
-
-  default-config:
-    plugin: dump
-    source: files
-    organize:
-      001-default.yaml: var/lib/pebble/default/layers/001-default.yaml
-    stage:
-      - var/lib/pebble/default/layers/001-default.yaml
 
   non-root-user:
     plugin: nil
