@@ -10,8 +10,8 @@ services:
   jupyter:
     override: replace
     startup: enabled
-    user: jovyan
-    command: /opt/conda/bin/jupyter lab --notebook-dir="/home/jovyan" --ip=0.0.0.0 --no-browser --port=8888 --ServerApp.token="" --ServerApp.password="" --ServerApp.allow_origin="*" --ServerApp.base_url="/" --ServerApp.authenticate_prometheus=False
+    user: notebook-controller
+    command: /manager
 platforms:
   amd64:
 
@@ -32,7 +32,7 @@ parts:
     stage-packages:
       - bash
     override-build: |
-      set -x
+      set -xe
       cd $CRAFT_PART_SRC/components/notebook-controller/
 
       # apply patches
