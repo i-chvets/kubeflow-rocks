@@ -9,6 +9,7 @@ base: ubuntu:22.04
 services:
   jupyter:
     override: replace
+    summary: "notebook-controller service"
     startup: enabled
     user: notebook-controller
     command: /manager
