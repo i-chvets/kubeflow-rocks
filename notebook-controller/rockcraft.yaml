@@ -6,10 +6,14 @@ description: |
 version: v1.7.0_1 # version format: <KF-upstream-version>_<Charmed-KF-version>
 license: Apache-2.0
 base: ubuntu:22.04
+services:
+  jupyter:
+    override: replace
+    startup: enabled
+    user: jovyan
+    command: /opt/conda/bin/jupyter lab --notebook-dir="/home/jovyan" --ip=0.0.0.0 --no-browser --port=8888 --ServerApp.token="" --ServerApp.password="" --ServerApp.allow_origin="*" --ServerApp.base_url="/" --ServerApp.authenticate_prometheus=False
 platforms:
   amd64:
-
-entrypoint: ["/bin/pebble", "run", "-v"]
 
 parts:
   notebook-controller:
@@ -46,14 +50,6 @@ parts:
       mkdir -p $CRAFT_PART_INSTALL/third_party
       cp third_party/license.txt $CRAFT_PART_INSTALL/third_party/license.txt
       cp -r /root/go/pkg/mod/github.com/hashicorp $CRAFT_PART_INSTALL/third_party/hashicorp
-
-  default-config:
-    plugin: dump
-    source: files
-    organize:
-      001-default.yaml: var/lib/pebble/default/layers/001-default.yaml
-    stage:
-      - var/lib/pebble/default/layers/001-default.yaml
 
   non-root-user:
     plugin: nil
