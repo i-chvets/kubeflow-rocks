@@ -16,7 +16,7 @@ sudo snap install yq
 sudo snap install go --classic
 sudo snap install trivy
 sudo snap install docker
-sudo snap install skopeo
+sudo snap install --edge skopeo
 sudo groupadd -f docker
 sudo usermod -aG docker $USER
 mkdir -p /home/$USER/.docker
