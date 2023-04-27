@@ -43,7 +43,7 @@ for COMPONENT in "${COMPONENTS_LIST[@]}"; do
 	cd -
 
 	echo "Scan $ROCK:$VERSION"
-	docker run -v /var/run/docker.sock:/var/run/docker.sock -v `pwd`:`pwd` -w `pwd` aquasec/trivy image --timeout 20m -f json -o trivy-report/$ROCK.json --ignore-unfixed $ROCK:$VERSION
+	docker run -v /var/run/docker.sock:/var/run/docker.sock -v `pwd`:`pwd` -w `pwd` aquasec/trivy image --timeout 20m -f json -o trivy-reports/$ROCK.json --ignore-unfixed $ROCK:$VERSION
 
         if [ "$CLEANUP_IMAGES" != true ]; then
                 continue
