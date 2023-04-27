@@ -19,12 +19,12 @@ sudo snap install docker
 sudo snap install --edge --devmode skopeo
 sudo snap install --edge --classic rockcraft
 sudo lxd init --auto
+sudo groupadd -f lxd
 sudo usermod -aG lxd $USER
+newgrp lxd
 sudo groupadd -f docker
 sudo usermod -aG docker $USER
+newgrp docker
 mkdir -p /home/$USER/.docker
 sudo chown "$USER":"$USER" /home/"$USER"/.docker -R
 sudo chmod g+rwx "$HOME/.docker" -R
-echo "Installed docker, created docker group and added user '$USER' to docker group"
-echo "Either logout/login or run 'newgrp docker' to be able to connect to Docker daemon"
-
