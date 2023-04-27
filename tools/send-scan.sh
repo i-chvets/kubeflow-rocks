@@ -33,6 +33,6 @@ git pull -q origin main
 cd -
 
 # send scans from supplied directory
-./kubeflow-ci/scripts/cve-reports/send-scan.py --report-path="$DIR" --jira-url="https://automation.atlassian.com/pro/hooks/$JIRA_TOKEN"
+./kubeflow-ci/scripts/cve-reports/send-scan.py --report-path="$DIR" --jira-url="$JIRA_URL"
 
 echo "Done."

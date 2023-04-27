@@ -23,8 +23,7 @@ COMPONENTS_LIST=(
 "notebook-controller"
 )
 
-# remove scan summary file and trivy-reports/
-rm -f scan-summary.txt
+# remove trivy-reports/
 rm -rf ./trivy-reports/
 mkdir -p ./trivy-reports/
 
