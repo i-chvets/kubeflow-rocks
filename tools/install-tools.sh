@@ -18,6 +18,7 @@ sudo snap install trivy
 sudo snap install docker
 sudo snap install --edge --devmode skopeo
 sudo snap install --edge --classic rockcraft
+sudo snap install lxd
 sudo lxd init --auto
 sudo groupadd -f lxd
 sudo usermod -aG lxd $USER
