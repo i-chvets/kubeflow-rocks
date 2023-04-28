@@ -14,7 +14,6 @@ sudo apt install -y zip
 sudo snap install jq
 sudo snap install yq
 sudo snap install go --classic
-sudo snap install trivy
 sudo snap install docker
 sudo snap install --edge --devmode skopeo
 sudo groupadd -f docker
