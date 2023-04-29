@@ -8,7 +8,7 @@ set -e
 
 sudo apt install -y make
 sudo apt install -y runc containerd
-sudo apt install -y docker.io
+#sudo apt install -y docker.io
 sudo apt install -y zip
 sudo snap install jq
 sudo snap install yq
