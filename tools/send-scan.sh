@@ -13,13 +13,13 @@ if [ -z $DIR ]
 then
     echo "ERROR: Directory with scan results is not specified."
     echo "Usage: send-scan.sh <directory-with-scan-results> <jira-url>"
-    exit
+    exit 1
 fi
 if [ -z $JIRA_URL ]
 then
 echo "ERROR: URL is not specified."
     echo "Usage: send-scan.sh <directory-with-scan-results> <jira-url>"
-    exit
+    exit 1
 fi
 
 # get script that sends scan results from Kubeflow CI repo
