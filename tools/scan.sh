@@ -10,6 +10,7 @@ set -e
 
 # Kubeflow container images scan
 echo "Scan ROCKs for Kubeflow"
+mkdir ./trivy-reports
 NAME=$(yq eval ".name" rockcraft.yaml)
 VERSION=$(yq eval ".version" rockcraft.yaml)
 ARCH=$(yq eval ".platforms | keys" rockcraft.yaml | awk -F ' ' '{print $2}')
