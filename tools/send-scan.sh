@@ -3,22 +3,22 @@
 # See LICENSE file for licensing details.
 #
 # Usage:
-#  send-scan.sh <directory-with-scan-results> <jira-token>
+#  send-scan.sh <directory-with-scan-results> <jira-url>
 #
 set -e
 
 DIR=$1
-JIRA_TOKEN=$2
+JIRA_URL=$2
 if [ -z $DIR ]
 then
     echo "ERROR: Directory with scan results is not specified."
-    echo "Usage: send-scan.sh <directory-with-scan-results> <jira-token>"
+    echo "Usage: send-scan.sh <directory-with-scan-results> <jira-url>"
     exit
 fi
-if [ -z $JIRA_TOKEN ]
+if [ -z $JIRA_URL ]
 then
-echo "ERROR: Token is not specified."
-    echo "Usage: send-scan.sh <directory-with-scan-results> <jira-token>"
+echo "ERROR: URL is not specified."
+    echo "Usage: send-scan.sh <directory-with-scan-results> <jira-url>"
     exit
 fi
 
