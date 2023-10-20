@@ -72,8 +72,8 @@ jobs:
           ARCH=$(yq eval ".platforms | keys" rockcraft.yaml | awk -F ' ' '{print $2}')
           ROCK="${NAME}_${VERSION}_${ARCH}"
           COMMIT_ID=$(git rev-parse --short HEAD)
-          sudo skopeo --insecure-policy copy oci-archive:$ROCK.rock docker-daemon:charmedkubeflow/$ROCK:$VERSION
+          sudo skopeo --insecure-policy copy oci-archive:$ROCK.rock docker-daemon:charmedkubeflow/$NAME:$VERSION
           echo "image=$ROCK:$VERSION" >> "$GITHUB_OUTPUT"
-          docker tag charmedkubeflow/$ROCK:$VERSION charmedkubeflow/$ROCK:$VERSION_$COMMIT_ID
-          docker push charmedkubeflow/$ROCK:$VERSION_$COMMIT_ID
+          docker tag charmedkubeflow/$NAME:$VERSION charmedkubeflow/$NAME:${VERSION}_${COMMIT_ID}
+          docker push charmedkubeflow/$NAME:${VERSION}_${COMMIT_ID}
         working-directory: ${{ inputs.rockcraft-dir }}
