@@ -74,5 +74,6 @@ jobs:
           COMMIT_ID=$(git rev-parse --short HEAD)
           sudo skopeo --insecure-policy copy oci-archive:$ROCK.rock docker-daemon:charmedkubeflow/$ROCK:$VERSION
           echo "image=$ROCK:$VERSION" >> "$GITHUB_OUTPUT"
-          docker push charmedkubeflow/$ROCK:$VERSIONi_$COMMIT_ID
+          docker tag charmedkubeflow/$ROCK:$VERSION charmedkubeflow/$ROCK:$VERSION_$COMMIT_ID
+          docker push charmedkubeflow/$ROCK:$VERSION_$COMMIT_ID
         working-directory: ${{ inputs.rockcraft-dir }}
