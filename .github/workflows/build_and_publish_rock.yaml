@@ -30,10 +30,8 @@ on:
 jobs:
   build-publish-rock:
     name: Build and publish ROCK
-    runs-on: ubuntu-22.04
-    steps:
-    - uses: canonical/charmed-kubeflow-workflows/.github/workflows/build_and_publish_rock.yaml@feat-rock-common-ci
-      with:
-        rockcraft-dir: ${{ inputs.rockcraft-dir }}
-        source-branch: ${{ inputs.source_branch }}
-      secrets: inherit
+    uses: canonical/charmed-kubeflow-workflows/.github/workflows/build_and_publish_rock.yaml@feat-rock-common-ci
+    with:
+      rockcraft-dir: ${{ inputs.rockcraft-dir }}
+      source-branch: ${{ inputs.source_branch }}
+    secrets: inherit
