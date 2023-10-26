@@ -9,7 +9,7 @@ on:
         required: true
         default: '.'
         type: string
-      source_branch:
+      source-branch:
         description: Github branch from this repo to publish.  If blank, will use the default branch
         default: ''
         required: false
@@ -21,7 +21,7 @@ on:
         required: true
         default: '.'
         type: string
-      source_branch:
+      source-branch:
         description: Github branch from this repo to publish.  If blank, will use the default branch
         default: ''
         required: false
@@ -33,5 +33,5 @@ jobs:
     uses: canonical/charmed-kubeflow-workflows/.github/workflows/build_and_publish_rock.yaml@feat-rock-common-ci
     with:
       rockcraft-dir: ${{ inputs.rockcraft-dir }}
-      source-branch: ${{ inputs.source_branch }}
+      source-branch: ${{ inputs.source-branch }}
     secrets: inherit
